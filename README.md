@@ -2,8 +2,10 @@ site Name-
 # Car Doctor || SSLCOMMERZE
 
 
+- This site is: Payment System Integration
+- This site is only Practice Purpose 
+- Use SSLCOMMERZ Sandbox Account (Testing Account)
 
-This site is: Payment System Integration
 #
 site Type: Client Side && Server Side
 #

@@ -2,12 +2,11 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom'
-import OrderRow from '../Orders/OrderRow';
 
 function PaymentSuccess() {
 
     const [orders, setOrders] = useState();
-    console.log("dataa, order: ", orders);
+    // console.log("dataa, order: ", orders);
     const location = useLocation();
     const query = new URLSearchParams(location.search)
     const transactionId = query.get("transactionId");
@@ -18,6 +17,11 @@ function PaymentSuccess() {
             .then(data => setOrders(data))
     }, [transactionId])
 
+    if (!orders?._id) {
+        return <div>
+            No order found .
+        </div>
+    }
     return (
         <div>
             <div>

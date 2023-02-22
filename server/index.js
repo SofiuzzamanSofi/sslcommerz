@@ -103,6 +103,14 @@ async function run() {
 
         app.post("/orders", verifyJWT, async (req, res) => {
             const order = req.body;
+            if (!order) {
+                return res.status(500).send({
+                    success: false,
+                    message: "Bad Auth"
+                })
+            }
+            // console.log(order);
+            // return;
             const orderService = await serviceCollection.findOne({ _id: order.service })
 
             // ssl commerz payment ------ 
@@ -157,6 +165,9 @@ async function run() {
 
         app.post("/payment/success", async (req, res) => {
             const { transactionId } = req.query;
+            if (!transactionId) {
+                return res.redirect("http://localhost:3000/payment/failed")
+            }
             // console.log("success:", transactionId);
             const result = await orderCollection.updateOne(
                 { transactionId },
@@ -174,7 +185,6 @@ async function run() {
             const { transactionId } = req.query;
             // console.log("success:", transactionId);
             const result = await orderCollection.deleteOne({ transactionId })
-
             if (result.deletedCount) {
                 res.redirect(`http://localhost:3000/payment/failed`)
                 // console.log("clg modified count");
