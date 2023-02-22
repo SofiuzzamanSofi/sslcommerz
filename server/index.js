@@ -113,7 +113,7 @@ async function run() {
                 tran_id: transactionId, // use unique tran_id for each api call
 
                 success_url: `http://localhost:5000/payment/success?transactionId=${transactionId}`,
-                fail_url: 'http://localhost:5000/payment/fail',
+                fail_url: `http://localhost:5000/payment/fail?transactionId=${transactionId}`,
                 cancel_url: 'http://localhost:5000/payment/cancel',
                 ipn_url: 'http://localhost:5000/payment/ipn',
                 shipping_method: 'Courier',
@@ -167,6 +167,16 @@ async function run() {
             )
             if (result.modifiedCount) {
                 res.redirect(`http://localhost:3000/payment/success?transactionId=${transactionId}`)
+                // console.log("clg modified count");
+            }
+        });
+        app.post("/payment/fail", async (req, res) => {
+            const { transactionId } = req.query;
+            // console.log("success:", transactionId);
+            const result = await orderCollection.deleteOne({ transactionId })
+
+            if (result.deletedCount) {
+                res.redirect(`http://localhost:3000/payment/failed`)
                 // console.log("clg modified count");
             }
         });

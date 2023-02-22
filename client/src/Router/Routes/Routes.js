@@ -6,6 +6,7 @@ import Orders from "../../Pages/Orders/Orders";
 import PaymentSuccess from "../../Pages/payments/PaymentSuccess";
 import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import PaymentFailed from "./PaymentFailed";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -37,7 +38,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/payment/success',
-        element: <PrivateRoute><PaymentSuccess></PaymentSuccess></PrivateRoute>
+        element: <PrivateRoute><PaymentSuccess /></PrivateRoute>
+      },
+      {
+        path: '/payment/failed',
+        element: <PrivateRoute><PaymentFailed /></PrivateRoute>
       },
     ]
   }
