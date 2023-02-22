@@ -40,7 +40,7 @@ const Checkout = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 window.location.replace(data?.url)
                 if (data.acknowledged) {
                     alert('Order placed successfully')

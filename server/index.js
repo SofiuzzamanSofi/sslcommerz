@@ -173,7 +173,7 @@ async function run() {
 
         app.get("/orders/by-transaction-id/:id", async (req, res) => {
             const { id } = req.params;
-            const order = orderCollection.findOne({ transactionId: id });
+            const order = await orderCollection.findOne({ transactionId: id });
             res.send(order)
         })
 
